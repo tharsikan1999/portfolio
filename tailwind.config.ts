@@ -7,14 +7,31 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      primary: ["Sora", "sans-serif"],
+    },
+    container: {
+      center: true,
+      padding: "1rem",
+    },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1230px",
+    },
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "bg-effect-1": "url('/src/assets/Image/bg-effect-1.png')",
+        "bg-effect-2": "url('/src/assets/Image/bg-effect-2.png')",
+      },
+      boxShadow: {
+        black: "6px 6px 0px -1px rgba(15, 23, 42, 1)",
+        gray: "5px 5px 0px 0px rgba(15, 23, 42, 1)",
+        yellow: "5px 5px 0px 0px rgba(202, 138, 4, 1)",
       },
     },
+    plugins: [],
   },
-  plugins: [],
 };
 export default config;
