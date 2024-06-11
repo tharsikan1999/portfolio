@@ -5,6 +5,7 @@ import HomePage from "@/components/Home/Home";
 import LogoSlider from "@/components/LogoSlider/LogoSlider";
 import Navbar from "@/components/Navbar/Navbar";
 import Services from "@/components/Services/Services";
+import Skills from "@/components/Skills/Skills";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <LogoSlider />
       <About />
       <Services />
+      <Skills />
     </>
   );
 }
