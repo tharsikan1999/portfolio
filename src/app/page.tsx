@@ -1,9 +1,11 @@
 "use client";
 
 import About from "@/components/About/About";
+import Cta from "@/components/Cta/Cta";
 import HomePage from "@/components/Home/Home";
 import LogoSlider from "@/components/LogoSlider/LogoSlider";
 import Navbar from "@/components/Navbar/Navbar";
+import Portfolio from "@/components/Portfolio/Portfolio";
 import Services from "@/components/Services/Services";
 import Skills from "@/components/Skills/Skills";
 
@@ -16,6 +18,8 @@ export default function Home() {
       <About />
       <Services />
       <Skills />
+      <Cta />
+      <Portfolio />
     </>
   );
 }
