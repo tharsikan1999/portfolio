@@ -5,7 +5,7 @@ const Services = () => {
   // var color = "#fde047"
 
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Services -----*/}
       <section
         className="py-24 bg-bg-effect-1 bg-cover bg-no-repeat"
@@ -44,7 +44,7 @@ const Services = () => {
         </div>
       </section>
       {/*----- End Services -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

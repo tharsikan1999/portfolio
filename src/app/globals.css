@@ -1,3 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Jost", sans-serif;
+}
+
+@layer base {
+  h3 {
+    @apply font-semibold uppercase lg:text-[50px] md:text-[40px] text-4xl;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-block px-5 py-[10px] text-sm font-medium uppercase tracking-[2px] transition-all duration-300 ease-in;
+  }
+
+  .btn-theme {
+    @apply bg-orange-600 hover:bg-slate-900 text-white shadow-black hover:shadow-orange-600;
+  }
+  .btn-dark {
+    @apply bg-slate-900 hover:bg-orange-600 text-white shadow-black shadow-orange-600 hover:shadow-slate-900;
+  }
+  .btn-yellow {
+    @apply bg-yellow-400 hover:bg-orange-600 text-white shadow-yellow hover:shadow-yellow-400;
+  }
+}
+
+.active {
+  color: #ea580c;
+}
+
+.slick-slide > div {
+  margin: 0 10px 10px 10px;
+}

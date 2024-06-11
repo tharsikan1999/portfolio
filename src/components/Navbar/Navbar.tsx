@@ -33,7 +33,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Navbar -----*/}
       <header>
         <nav className="fixed top-0 w-full z-50 bg-white">
@@ -100,7 +100,7 @@ const Navbar = () => {
         </nav>
       </header>
       {/*----- End Navbar -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

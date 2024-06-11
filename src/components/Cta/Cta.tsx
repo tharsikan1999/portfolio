@@ -2,7 +2,7 @@ import React from "react";
 
 const Cta = () => {
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Cta -----*/}
       <section className="py-10 bg-slate-900">
         <div className="container">
@@ -21,7 +21,7 @@ const Cta = () => {
         </div>
       </section>
       {/*----- End Cta -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

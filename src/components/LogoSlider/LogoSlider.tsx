@@ -5,7 +5,7 @@ const LogoSlider = () => {
   const cvFilePath = cv;
 
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Cta -----*/}
       <section className="py-10 bg-slate-900" id="LogoSlider">
         <div className="container">
@@ -29,7 +29,7 @@ const LogoSlider = () => {
         </div>
       </section>
       {/*----- End Cta -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

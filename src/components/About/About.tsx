@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <React.Fragment>
+    <>
       {/*----- Start About -----*/}
       <section className="py-24" id="about">
         <div className="container">
@@ -58,7 +58,7 @@ const About = () => {
         </div>
       </section>
       {/*----- End About -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

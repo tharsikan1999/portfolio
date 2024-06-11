@@ -46,7 +46,7 @@ const Contact = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Contact -----*/}
       <section
         className="py-24 bg-slate-900 bg-bg-effect-2 bg-no-repeat bg-cover bg-center"
@@ -181,7 +181,7 @@ const Contact = () => {
         </div>
       </section>
       {/*----- End Contact -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

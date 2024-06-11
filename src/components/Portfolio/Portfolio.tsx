@@ -12,7 +12,7 @@ const Portfolio = () => {
     setIsVisible(false);
   };
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Projects -----*/}
       <section className="py-24 bg-orange-50" id="Portfolio">
         <div className="container">
@@ -77,7 +77,7 @@ const Portfolio = () => {
         </div>
       </section>
       {/*----- End Projects -----*/}
-    </React.Fragment>
+    </>
   );
 };
 

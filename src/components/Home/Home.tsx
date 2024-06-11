@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Home = () => {
   return (
-    <React.Fragment>
+    <>
       {/*----- Start Home -----*/}
       <section
         className="pt-[120px] pb-[80px] lg:pt-[180px] lg:pb-[100px] bg-orange-50 relative overflow-hidden"
@@ -50,7 +50,7 @@ const Home = () => {
         </div>
       </section>
       {/*----- End Home -----*/}
-    </React.Fragment>
+    </>
   );
 };
 
