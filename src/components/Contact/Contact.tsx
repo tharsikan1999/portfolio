@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import contact_bg from "../../assets/Image/contact-bg.png";
 import { ContactData } from "./ContactData";
 import axios from "axios";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [formValues, setFormValues] = useState({
@@ -12,11 +13,13 @@ const Contact = () => {
     Message: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
       const { Name, Email, Subject, Message } = formValues;
@@ -40,8 +43,9 @@ const Contact = () => {
       });
 
       window.location.reload();
+      toast.success("Your message has been sent successfully");
     } catch (error) {
-      alert("Something went wrong, Please try again");
+      toast.error("Something went wrong, Please try again");
     }
   };
 
@@ -131,7 +135,7 @@ const Contact = () => {
                           id="Message"
                           name="Message"
                           placeholder="Your message *"
-                          rows="4"
+                          rows={4}
                           className="py-3 px-3 text-base w-full border border-black font-normal outline-none"
                           onChange={handleInputChange}
                         />

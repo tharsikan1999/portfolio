@@ -19,15 +19,15 @@ const About = () => {
             </div>
             <div className="lg:col-span-6 lg:pl-12">
               <h3 className="font-semibold text-[26px] md:text-[40px] leading-[1.2] mb-6 normal-case">
-                I'm a Freelancer Full Stack Developer with over 1 years of
+                I&apos;m a Freelancer Full Stack Developer with over 1 years of
                 experience.
               </h3>
               <p className="text-base md:text-lg text-slate-700/90">
                 As a versatile Full Stack Developer with over a year of
                 experience in Colombo, I code and create web elements for
                 amazing clients globally. I thrive on collaborating with new
-                people, welcoming fresh experiences and challenges. Let's build
-                something extraordinary together!
+                people, welcoming fresh experiences and challenges. Let&apos;s
+                build something extraordinary together!
               </p>
               <div className="grid grid-cols-12 pt-5">
                 {NumberData.map((e, key) => {
