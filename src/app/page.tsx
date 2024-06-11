@@ -1,6 +1,7 @@
 "use client";
 
 import About from "@/components/About/About";
+import Contact from "@/components/Contact/Contact";
 import Cta from "@/components/Cta/Cta";
 import HomePage from "@/components/Home/Home";
 import LogoSlider from "@/components/LogoSlider/LogoSlider";
@@ -20,6 +21,7 @@ export default function Home() {
       <Skills />
       <Cta />
       <Portfolio />
+      <Contact />
     </>
   );
 }
