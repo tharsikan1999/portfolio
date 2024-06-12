@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ContactData } from "./ContactData";
+import Image from "next/image";
 
 const schema = z.object({
   Name: z.string().min(3).max(50),
@@ -61,7 +63,7 @@ const Contact = () => {
                       <div>
                         <label
                           htmlFor="Name"
-                          className="mb-2 inline-block text-slate-700/95"
+                          className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           First name
                         </label>
@@ -75,7 +77,9 @@ const Contact = () => {
                           type="text"
                         />
                         {errors.Name && (
-                          <p className="text-red-500">Name is required</p>
+                          <p className="text-red-500 font-medium mt-1">
+                            Name is required
+                          </p>
                         )}
                       </div>
                     </div>
@@ -83,7 +87,7 @@ const Contact = () => {
                       <div>
                         <label
                           htmlFor="Email"
-                          className="mb-2 inline-block text-slate-700/95"
+                          className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Your Email
                         </label>
@@ -97,7 +101,9 @@ const Contact = () => {
                           type="email"
                         />
                         {errors.Email && (
-                          <p className="text-red-500">Email is required</p>
+                          <p className="text-red-500 font-medium mt-1">
+                            Email is required
+                          </p>
                         )}
                       </div>
                     </div>
@@ -105,7 +111,7 @@ const Contact = () => {
                       <div>
                         <label
                           htmlFor="Subject"
-                          className="mb-2 inline-block text-slate-700/95"
+                          className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Subject
                         </label>
@@ -119,7 +125,9 @@ const Contact = () => {
                           type="text"
                         />
                         {errors.Subject && (
-                          <p className="text-red-500">Subject is required</p>
+                          <p className="text-red-500 font-medium mt-1">
+                            Subject is required
+                          </p>
                         )}
                       </div>
                     </div>
@@ -127,7 +135,7 @@ const Contact = () => {
                       <div>
                         <label
                           htmlFor="Message"
-                          className="mb-2 inline-block text-slate-700/95"
+                          className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Your message
                         </label>
@@ -141,7 +149,9 @@ const Contact = () => {
                           }`}
                         />
                         {errors.Message && (
-                          <p className="text-red-500">Message is required</p>
+                          <p className="text-red-500 font-medium mt-1">
+                            Message is required
+                          </p>
                         )}
                       </div>
                     </div>
@@ -157,6 +167,34 @@ const Contact = () => {
               </div>
             </div>
             {/* End Contact form */}
+            {/* Start Contact */}
+            <div className="col-span-12 lg:col-span-6 flex">
+              <div className="lg:max-w-[410px] w-full lg:ml-auto pt-[50px] lg:pt-0">
+                <div className="pb-10 ">
+                  <Image className="w-full" src={contact_bg} title="" alt="" />
+                </div>
+                <ul>
+                  {ContactData.map((e, key) => (
+                    <li className="relative flex mb-9" key={key}>
+                      <div
+                        className={`inline-flex items-center justify-center text-2xl h-14 w-14 cursor-pointer ${e.Bg_color}`}
+                      >
+                        {e.icon}
+                      </div>
+                      <div className="flex-1 pl-4 ">
+                        <h5 className="mb-2 text-sm font-normal uppercase tracking-wider text-slate-300">
+                          {e.name}
+                        </h5>
+                        <p className="font-medium md:text-xl text-lg text-white max-w-[250px] cursor-pointer">
+                          {e.contact}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            {/* End Contact */}
           </div>
         </div>
       </section>
