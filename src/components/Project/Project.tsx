@@ -1,6 +1,7 @@
 import React from "react";
 import { ProjectData, ProjectImg } from "./ProjectData";
 import { RiCloseFill } from "react-icons/ri";
+import Image from "next/image";
 
 const Project = ({ onClose }) => {
   const { closeComponent, projectIndex } = onClose;
