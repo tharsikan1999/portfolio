@@ -17,8 +17,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 100, x: index % 2 === 0 ? 100 : -10 }}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : {}}
+      initial={{ y: 100, x: index % 2 === 0 ? 100 : -10 }}
+      animate={inView ? { y: 0, x: 0 } : {}}
       transition={{ duration: 0.2 }}
       className="lg:col-span-6 hover:shadow-black transition-all duration-300 ease-in border-2"
     >

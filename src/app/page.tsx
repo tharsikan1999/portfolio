@@ -11,6 +11,7 @@ import Portfolio from "@/components/Portfolio/Portfolio";
 import Services from "@/components/Services/Services";
 import Skills from "@/components/Skills/Skills";
 import React from "react";
+import Testimonial from "@/components/Testimonial/Testimonial";
 
 export default function Home() {
   return (
