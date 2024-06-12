@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React from "react";
 import contact_bg from "../../assets/Image/contact-bg.png";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -6,6 +6,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ContactData } from "./ContactData";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const schema = z.object({
   name: z.string().min(3).max(50),
@@ -23,6 +25,11 @@ const Contact = () => {
     formState: { errors },
     reset,
   } = useForm<FormValues>();
+
+  const { ref, inView } = useInView({
+    triggerOnce: false, // Trigger animation once
+    threshold: 0.2, // Trigger animation when 20% of the element is in view
+  });
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -42,12 +49,22 @@ const Contact = () => {
       <section
         className="py-24 bg-slate-900 bg-bg-effect-2 bg-no-repeat bg-cover bg-center"
         id="Contact"
+        ref={ref}
       >
         <div className="container">
           <div className="grid grid-cols-12">
             {/* Start Contact form  */}
             <div className="col-span-12 lg:col-span-6 ">
-              <div className="p-9 bg-white">
+              <motion.div
+                initial={{ opacity: 0, y: 50, x: -50 }}
+                animate={{
+                  opacity: inView ? 1 : 0,
+                  y: inView ? 0 : 50,
+                  x: inView ? 0 : -50,
+                  transition: { duration: 0.6, ease: "easeOut" },
+                }}
+                className="p-9 bg-white"
+              >
                 <h6 className="text-[32px] font-semibold text-black mb-1.5">
                   Get in touch
                 </h6>
@@ -161,24 +178,43 @@ const Contact = () => {
                     </div>
                   </div>
                 </form>
-              </div>
+              </motion.div>
             </div>
             {/* End Contact form */}
             {/* Start Contact */}
             <div className="col-span-12 lg:col-span-6 flex">
-              <div className="lg:max-w-[410px] w-full lg:ml-auto pt-[50px] lg:pt-0">
-                <div className="pb-10 ">
+              <motion.div
+                initial={{ opacity: 0, y: 50, x: 50 }}
+                animate={{
+                  opacity: inView ? 1 : 0,
+                  y: inView ? 0 : 50,
+                  x: inView ? 0 : 50,
+                  transition: { duration: 0.6, ease: "easeOut" },
+                }}
+                className="lg:max-w-[410px] w-full lg:ml-auto pt-[50px] lg:pt-0"
+              >
+                <div className="pb-10">
                   <Image className="w-full" src={contact_bg} title="" alt="" />
                 </div>
                 <ul>
                   {ContactData.map((e, key) => (
-                    <li className="relative flex mb-9" key={key}>
+                    <motion.li
+                      initial={{ opacity: 0, y: 50, x: 50 }}
+                      animate={{
+                        opacity: inView ? 1 : 0,
+                        y: inView ? 0 : 50,
+                        x: inView ? 0 : 50,
+                        transition: { duration: 0.6, ease: "easeOut" },
+                      }}
+                      className="relative flex mb-9"
+                      key={key}
+                    >
                       <div
                         className={`inline-flex items-center justify-center text-2xl h-14 w-14 cursor-pointer ${e.Bg_color}`}
                       >
                         {e.icon}
                       </div>
-                      <div className="flex-1 pl-4 ">
+                      <div className="flex-1 pl-4">
                         <h5 className="mb-2 text-sm font-normal uppercase tracking-wider text-slate-300">
                           {e.name}
                         </h5>
@@ -186,10 +222,10 @@ const Contact = () => {
                           {e.contact}
                         </p>
                       </div>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             </div>
             {/* End Contact */}
           </div>

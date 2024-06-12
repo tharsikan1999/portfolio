@@ -26,24 +26,24 @@ const Project = ({ onClose }) => {
                       return (
                         <React.Fragment key={key}>
                           <div className="  ">
-                            <img
+                            <Image
                               className="border mb-2 rounded-2xl"
                               src={e.imgOne}
                               alt=""
                             />
-                            <img
+                            <Image
                               className="border rounded-2xl "
                               src={e.imgTwo}
                               alt=""
                             />
                           </div>
                           <div className="  ">
-                            <img
+                            <Image
                               className="border rounded-2xl"
                               src={e.imgThree}
                               alt=""
                             />
-                            <img
+                            <Image
                               className="border mt-2 rounded-2xl"
                               src={e.imgFour}
                               alt=""
@@ -69,7 +69,7 @@ const Project = ({ onClose }) => {
                       </h4>
                       <p className="mb-3 text-slate-700/90">{e.Detail1}</p>
                       <p className="text-slate-700/90">{e.Detail2}</p>
-                      <p className="text-slate-700/90">{e.Detail3}</p>
+                      <p className="text-slate-700/90">{e.Detail1}</p>
                       <ul className="pt-7 list-none">
                         <li className="flex py-2">
                           <span className="w-[100px] font-semibold">Type:</span>
