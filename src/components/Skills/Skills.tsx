@@ -17,6 +17,7 @@ const Skills = () => {
           </div>
           <div className="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1">
             <div className="lg:col-span-6 lg:pl-9">
+              {/* Technologies*/}
               <div>
                 <div className="lg:pb-7 pt-10 md:pb-10 pb-8 text-4xl font-semibold text-center">
                   <p>Technologies</p>
@@ -43,6 +44,7 @@ const Skills = () => {
                   })}
                 </div>
               </div>
+              {/* Databases*/}
               <div>
                 <div className="lg:pb-7 pt-10 md:pb-10 pb-8 text-4xl font-semibold text-center">
                   <p>Databases</p>
@@ -71,6 +73,7 @@ const Skills = () => {
               </div>
             </div>
             <div className="lg:col-span-6 text-center  md:pt-0  lg:pl-7 md:pl-7  ">
+              {/* Frameworks*/}
               <div>
                 <div className="lg:pb-7 pt-10 md:pb-10 pb-8 text-4xl font-semibold ">
                   <p>Frameworks</p>
@@ -97,6 +100,7 @@ const Skills = () => {
                   })}
                 </div>
               </div>
+              {/* Languages*/}
               <div className="sm:mt-10 mt-10 ">
                 <div className="lg:pb-7 md:pb-10 pb-8 text-4xl font-semibold ">
                   <p>Languages</p>

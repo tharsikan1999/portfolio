@@ -1,5 +1,5 @@
 "use client";
-
+import { ToastContainer } from "react-toastify";
 import About from "@/components/About/About";
 import Contact from "@/components/Contact/Contact";
 import Cta from "@/components/Cta/Cta";
@@ -25,6 +25,7 @@ export default function Home() {
       <Portfolio />
       <Contact />
       <Footer />
+      <ToastContainer />
     </>
   );
 }

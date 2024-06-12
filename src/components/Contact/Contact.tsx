@@ -1,49 +1,37 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import contact_bg from "../../assets/Image/contact-bg.png";
-import { ContactData } from "./ContactData";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import axios from "axios";
-import Image from "next/image";
 import { toast } from "react-toastify";
 
+const schema = z.object({
+  Name: z.string().min(3).max(50),
+  Email: z.string().email(),
+  Subject: z.string().min(5).max(100),
+  Message: z.string().min(10).max(500),
+});
+
+type FormValues = z.infer<typeof schema>;
+
 const Contact = () => {
-  const [formValues, setFormValues] = useState({
-    Name: "",
-    Email: "",
-    Subject: "",
-    Message: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>();
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (data: FormValues) => {
     try {
-      event.preventDefault();
-      const { Name, Email, Subject, Message } = formValues;
       const response = await axios.post(
         "https://sheet.best/api/sheets/87fa8774-8f15-4e71-9a75-815eeaa6f958",
-        {
-          Name,
-          Email,
-          Subject,
-          Message,
-        }
+        data
       );
       if (response.status === 200) {
-        alert("Your message has been sent successfully");
+        toast.success("Your message has been sent successfully");
+        reset(); // Reset form after successful submission
       }
-      setFormValues({
-        Name: "",
-        Email: "",
-        Subject: "",
-        Message: "",
-      });
-
-      window.location.reload();
-      toast.success("Your message has been sent successfully");
     } catch (error) {
       toast.error("Something went wrong, Please try again");
     }
@@ -67,7 +55,7 @@ const Contact = () => {
                 <p className="text-lg mb-8">
                   Our friendly team would love to hear from you.
                 </p>
-                <form method="post" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-12 gap-3">
                     <div className="col-span-12 md:col-span-6">
                       <div>
@@ -79,12 +67,16 @@ const Contact = () => {
                         </label>
                         <input
                           id="Name"
-                          name="Name"
+                          {...register("Name", { required: true })}
                           placeholder="Name *"
-                          className="py-3 px-3 text-base w-full border border-black font-normal outline-none"
+                          className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
+                            errors.Name ? "border-red-500" : ""
+                          }`}
                           type="text"
-                          onChange={handleInputChange}
                         />
+                        {errors.Name && (
+                          <p className="text-red-500">Name is required</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-span-12 md:col-span-6">
@@ -97,12 +89,16 @@ const Contact = () => {
                         </label>
                         <input
                           id="Email"
-                          name="Email"
+                          {...register("Email", { required: true })}
                           placeholder="Email *"
-                          className="py-3 px-3 text-base w-full border border-black font-normal outline-none"
+                          className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
+                            errors.Email ? "border-red-500" : ""
+                          }`}
                           type="email"
-                          onChange={handleInputChange}
                         />
+                        {errors.Email && (
+                          <p className="text-red-500">Email is required</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-span-12">
@@ -115,30 +111,38 @@ const Contact = () => {
                         </label>
                         <input
                           id="Subject"
-                          name="Subject"
+                          {...register("Subject", { required: true })}
                           placeholder="Subject *"
-                          className="py-3 px-3 text-base w-full border border-black font-normal outline-none"
+                          className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
+                            errors.Subject ? "border-red-500" : ""
+                          }`}
                           type="text"
-                          onChange={handleInputChange}
                         />
+                        {errors.Subject && (
+                          <p className="text-red-500">Subject is required</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-span-12">
                       <div>
                         <label
-                          htmlFor="message"
+                          htmlFor="Message"
                           className="mb-2 inline-block text-slate-700/95"
                         >
                           Your message
                         </label>
                         <textarea
                           id="Message"
-                          name="Message"
+                          {...register("Message", { required: true })}
                           placeholder="Your message *"
                           rows={4}
-                          className="py-3 px-3 text-base w-full border border-black font-normal outline-none"
-                          onChange={handleInputChange}
+                          className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
+                            errors.Message ? "border-red-500" : ""
+                          }`}
                         />
+                        {errors.Message && (
+                          <p className="text-red-500">Message is required</p>
+                        )}
                       </div>
                     </div>
                     <div className="col-span-12">
@@ -153,34 +157,6 @@ const Contact = () => {
               </div>
             </div>
             {/* End Contact form */}
-            {/* Start Contact */}
-            <div className="col-span-12 lg:col-span-6 flex">
-              <div className="lg:max-w-[410px] w-full lg:ml-auto pt-[50px] lg:pt-0">
-                <div className="pb-10 ">
-                  <Image className="w-full" src={contact_bg} title="" alt="" />
-                </div>
-                <ul>
-                  {ContactData.map((e, key) => (
-                    <li className="relative flex mb-9" key={key}>
-                      <div
-                        className={`inline-flex items-center justify-center text-2xl h-14 w-14 cursor-pointer ${e.Bg_color}`}
-                      >
-                        {e.icon}
-                      </div>
-                      <div className="flex-1 pl-4 ">
-                        <h5 className="mb-2 text-sm font-normal uppercase tracking-wider text-slate-300">
-                          {e.name}
-                        </h5>
-                        <p className="font-medium md:text-xl text-lg text-white max-w-[250px] cursor-pointer">
-                          {e.contact}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            {/* End Contact */}
           </div>
         </div>
       </section>
