@@ -8,10 +8,10 @@ import { ContactData } from "./ContactData";
 import Image from "next/image";
 
 const schema = z.object({
-  Name: z.string().min(3).max(50),
-  Email: z.string().email(),
-  Subject: z.string().min(5).max(100),
-  Message: z.string().min(10).max(500),
+  name: z.string().min(3).max(50),
+  email: z.string().email(),
+  subject: z.string().min(5).max(100),
+  message: z.string().min(10).max(500),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -26,13 +26,10 @@ const Contact = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const response = await axios.post(
-        "https://sheet.best/api/sheets/87fa8774-8f15-4e71-9a75-815eeaa6f958",
-        data
-      );
+      const response = await axios.post("http://localhost:3000/api/add", data);
       if (response.status === 200) {
         toast.success("Your message has been sent successfully");
-        reset(); // Reset form after successful submission
+        reset();
       }
     } catch (error) {
       toast.error("Something went wrong, Please try again");
@@ -69,14 +66,14 @@ const Contact = () => {
                         </label>
                         <input
                           id="Name"
-                          {...register("Name", { required: true })}
+                          {...register("name", { required: true })}
                           placeholder="Name *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
-                            errors.Name ? "border-red-500" : ""
+                            errors.name ? "border-red-500" : ""
                           }`}
                           type="text"
                         />
-                        {errors.Name && (
+                        {errors.name && (
                           <p className="text-red-500 font-medium mt-1">
                             Name is required
                           </p>
@@ -86,21 +83,21 @@ const Contact = () => {
                     <div className="col-span-12 md:col-span-6">
                       <div>
                         <label
-                          htmlFor="Email"
+                          htmlFor="email"
                           className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Your Email
                         </label>
                         <input
                           id="Email"
-                          {...register("Email", { required: true })}
+                          {...register("email", { required: true })}
                           placeholder="Email *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
-                            errors.Email ? "border-red-500" : ""
+                            errors.email ? "border-red-500" : ""
                           }`}
                           type="email"
                         />
-                        {errors.Email && (
+                        {errors.email && (
                           <p className="text-red-500 font-medium mt-1">
                             Email is required
                           </p>
@@ -110,21 +107,21 @@ const Contact = () => {
                     <div className="col-span-12">
                       <div>
                         <label
-                          htmlFor="Subject"
+                          htmlFor="subject"
                           className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Subject
                         </label>
                         <input
                           id="Subject"
-                          {...register("Subject", { required: true })}
+                          {...register("subject", { required: true })}
                           placeholder="Subject *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
-                            errors.Subject ? "border-red-500" : ""
+                            errors.subject ? "border-red-500" : ""
                           }`}
                           type="text"
                         />
-                        {errors.Subject && (
+                        {errors.subject && (
                           <p className="text-red-500 font-medium mt-1">
                             Subject is required
                           </p>
@@ -134,21 +131,21 @@ const Contact = () => {
                     <div className="col-span-12">
                       <div>
                         <label
-                          htmlFor="Message"
+                          htmlFor="message"
                           className="mb-2 inline-block text-slate-700/95 font-medium"
                         >
                           Your message
                         </label>
                         <textarea
                           id="Message"
-                          {...register("Message", { required: true })}
+                          {...register("message", { required: true })}
                           placeholder="Your message *"
                           rows={4}
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
-                            errors.Message ? "border-red-500" : ""
+                            errors.message ? "border-red-500" : ""
                           }`}
                         />
-                        {errors.Message && (
+                        {errors.message && (
                           <p className="text-red-500 font-medium mt-1">
                             Message is required
                           </p>
