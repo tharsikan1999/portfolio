@@ -4,8 +4,15 @@ import { FaMobileAlt } from "react-icons/fa";
 import { FaLaptopCode } from "react-icons/fa";
 import { MdDesignServices } from "react-icons/md";
 
+export interface ServiceDataType {
+  Logo: React.ReactNode;
+  Heding: string;
+  Detail: string;
+  Bg_color: string;
+}
+
 //---- Start Services Data -----
-export const ServicesData = [
+export const ServicesData: ServiceDataType[] = [
   {
     Bg_color: "bg-[#9bd3d0]",
     Logo: <MdComputer />,
