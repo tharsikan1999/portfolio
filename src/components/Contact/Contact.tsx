@@ -8,12 +8,33 @@ import { ContactData } from "./ContactData";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  subject: z.string().min(1, "Subject is required"),
-  message: z.string().min(1, "Message is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .refine((val) => val.trim().length > 0, {
+      message: "Name is required",
+    }),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .refine((val) => val.trim().length > 0, {
+      message: "Invalid email address",
+    }),
+  subject: z
+    .string()
+    .min(1, "Subject is required")
+    .refine((val) => val.trim().length > 0, {
+      message: "Subject is required",
+    }),
+  message: z
+    .string()
+    .min(1, "Message is required")
+    .refine((val) => val.trim().length > 0, {
+      message: "Message is required",
+    }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -22,9 +43,11 @@ const Contact = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
 
   const { ref, inView } = useInView({
     triggerOnce: false,
@@ -82,8 +105,9 @@ const Contact = () => {
                           First name
                         </label>
                         <input
-                          placeholder="Name"
+                          id="Name"
                           {...register("name")}
+                          placeholder="Name *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
                             errors.name ? "border-red-500" : ""
                           }`}
@@ -106,7 +130,7 @@ const Contact = () => {
                         </label>
                         <input
                           id="Email"
-                          {...register("email", { required: true })}
+                          {...register("email")}
                           placeholder="Email *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
                             errors.email ? "border-red-500" : ""
@@ -130,7 +154,7 @@ const Contact = () => {
                         </label>
                         <input
                           id="Subject"
-                          {...register("subject", { required: true })}
+                          {...register("subject")}
                           placeholder="Subject *"
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
                             errors.subject ? "border-red-500" : ""
@@ -154,7 +178,7 @@ const Contact = () => {
                         </label>
                         <textarea
                           id="Message"
-                          {...register("message", { required: true })}
+                          {...register("message")}
                           placeholder="Your message *"
                           rows={4}
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
@@ -170,8 +194,12 @@ const Contact = () => {
                     </div>
                     <div className="col-span-12">
                       <div>
-                        <button className="btn btn-yellow" type="submit">
-                          Send Message
+                        <button
+                          disabled={isSubmitting}
+                          className="btn btn-yellow"
+                          type="submit"
+                        >
+                          {isSubmitting ? "Sending..." : "Send Message"}
                         </button>
                       </div>
                     </div>
