@@ -10,10 +10,10 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const schema = z.object({
-  name: z.string().min(3).max(50),
-  email: z.string().email(),
-  subject: z.string().min(5).max(100),
-  message: z.string().min(10).max(500),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -27,13 +27,13 @@ const Contact = () => {
   } = useForm<FormValues>();
 
   const { ref, inView } = useInView({
-    triggerOnce: false, // Trigger animation once
-    threshold: 0.2, // Trigger animation when 20% of the element is in view
+    triggerOnce: false,
+    threshold: 0.2,
   });
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/add", data);
+      const response = await axios.post("/api/sendEmail", data);
       if (response.status === 200) {
         toast.success("Your message has been sent successfully");
         reset();
@@ -82,9 +82,8 @@ const Contact = () => {
                           First name
                         </label>
                         <input
-                          id="Name"
-                          {...register("name", { required: true })}
-                          placeholder="Name *"
+                          placeholder="Name"
+                          {...register("name")}
                           className={`py-3 px-3 text-base w-full border border-black font-normal outline-none ${
                             errors.name ? "border-red-500" : ""
                           }`}
@@ -92,7 +91,7 @@ const Contact = () => {
                         />
                         {errors.name && (
                           <p className="text-red-500 font-medium mt-1">
-                            Name is required
+                            {errors.name.message}
                           </p>
                         )}
                       </div>
@@ -116,7 +115,7 @@ const Contact = () => {
                         />
                         {errors.email && (
                           <p className="text-red-500 font-medium mt-1">
-                            Email is required
+                            {errors.email.message}
                           </p>
                         )}
                       </div>
@@ -140,7 +139,7 @@ const Contact = () => {
                         />
                         {errors.subject && (
                           <p className="text-red-500 font-medium mt-1">
-                            Subject is required
+                            {errors.subject.message}
                           </p>
                         )}
                       </div>
@@ -164,7 +163,7 @@ const Contact = () => {
                         />
                         {errors.message && (
                           <p className="text-red-500 font-medium mt-1">
-                            Message is required
+                            {errors.message.message}
                           </p>
                         )}
                       </div>

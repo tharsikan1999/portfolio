@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.6.0",
+    "@types/nodemailer": "^6.4.15",
     "@types/react-slick": "^0.23.13",
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.10",
     "mongoose": "^8.4.1",
     "next": "14.2.3",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
